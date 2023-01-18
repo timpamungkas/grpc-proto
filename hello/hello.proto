@@ -15,3 +15,7 @@ message HelloRequest {
 message HelloResponse { 
   string greet = 1;
 }
+
+service HelloService {
+  rpc SayHello (HelloRequest) returns (HelloResponse) {}
+}
