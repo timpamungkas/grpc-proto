@@ -1,4 +1,4 @@
-GO_MODULE := github.com/timpamungkas/course-grpc-proto
+GO_MODULE=github.com/timpamungkas/course-grpc-proto
 
 # init tools
 sudo apt-get install -y protobuf-compiler golang-goprotobuf-dev
