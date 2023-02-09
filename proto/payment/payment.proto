@@ -2,9 +2,9 @@ syntax = "proto3";
 
 package payment;
 
-import "transaction/cart.proto";
+import "proto/transaction/cart.proto";
 
-option go_package = "myapp/protogen/payment";
+option go_package = "github.com/timpamungkas/course-grpc-proto/protogen/go/payment";
 
 message PaymentRequest {
   transaction.Cart cart = 1;
@@ -19,6 +19,6 @@ message PaymentResponse {
   bool confirmed = 2;
 }
 
-service PaymentService {
-  rpc CreatePayment(PaymentRequest) returns (PaymentResponse) {}
+service YourService {
+  rpc YourMethod(PaymentRequest) returns (stream PaymentResponse) {}
 }
