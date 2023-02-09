@@ -22,7 +22,14 @@ jobs:
         shell: bash
         run: |
           chmod +x "${GITHUB_WORKSPACE}/generate-go.sh"
-          ./generate-go.sh
+          sudo apt-get install -y protobuf-compiler golang-goprotobuf-dev
+          go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+          go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+          rm -fR ./protogen
+          mkdir -p ./protogen/go
+          protoc --go_opt=module=github.com/timpamungkas/course-grpc-proto --go_out=. \
+	          --go-grpc_opt=module=github.com/timpamungkas/course-grpc-proto --go-grpc_out=. \
+	          ./proto/hello/*.proto ./proto/payment/*.proto ./proto/transaction/*.proto
       - name: Commit generated files
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
