@@ -7,7 +7,7 @@ on:
       - '.github/workflows/generate-protobuf.yml'
 
 jobs:
-  generate-protobuf:
+  generate-protobuf-go:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source
@@ -19,7 +19,9 @@ jobs:
           check-latest: true
           cache: true
       - name: Generate Go source
+        shell: bash
         run: |
+          chmod +x "${GITHUB_WORKSPACE}/*.sh"
           ./generate-go.sh
       - name: Commit generated files
         uses: stefanzweifel/git-auto-commit-action@v4
