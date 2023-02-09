@@ -22,6 +22,10 @@ jobs:
         shell: bash
         run: |
           make pipeline-build
+          cd protogen/go
+          ls
+          cd hello
+          ls
       - name: Commit generated files
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
