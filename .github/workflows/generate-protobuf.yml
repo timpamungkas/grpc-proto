@@ -21,6 +21,7 @@ jobs:
       - name: Generate Go source
         shell: bash
         run: |
+          echo Starting manual
           chmod +x "${GITHUB_WORKSPACE}/generate-go.sh"
           sudo apt-get install -y protobuf-compiler golang-goprotobuf-dev
           go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
