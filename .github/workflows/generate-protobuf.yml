@@ -21,7 +21,7 @@ jobs:
       - name: Generate Go source
         shell: bash
         run: |
-          chmod +x "${GITHUB_WORKSPACE}/*.sh"
+          chmod +x "${GITHUB_WORKSPACE}/generate-go.sh"
           ./generate-go.sh
       - name: Commit generated files
         uses: stefanzweifel/git-auto-commit-action@v4
