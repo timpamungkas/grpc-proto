@@ -30,4 +30,4 @@ pipeline-init:
 
 
 .PHONY: pipeline-build
-.pipeline-build: pipeline-init build
+pipeline-build: pipeline-init build
