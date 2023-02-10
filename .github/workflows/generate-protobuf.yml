@@ -32,7 +32,7 @@ jobs:
         uses: mathieudutour/github-tag-action@v6.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          release_branches: main, master
+          release_branches: main,master
       - name: Commit generated files
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
