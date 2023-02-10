@@ -22,6 +22,8 @@ jobs:
         shell: bash
         run: |
           make pipeline-build
+          git add .
+          git commit -am "[Auto Generated Go]"
           cd protogen/go
           ls
           cd hello
