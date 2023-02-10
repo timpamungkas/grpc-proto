@@ -15,6 +15,3 @@
 bin/
 vendor/
 tmp/
-
-# Locally generated files
-protogen/

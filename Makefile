@@ -6,7 +6,7 @@ ifeq ($(OS), Windows_NT)
 	if exist "protogen" rd /s /q protogen
 	mkdir protogen\go
 else
-	rm -fR ./protogen \
+	rm -fR ./protogen 
 	mkdir -p ./protogen/go
 endif
 
@@ -30,4 +30,4 @@ pipeline-init:
 
 
 .PHONY: pipeline-build
-.pipeline-build: pipeline-init build
+pipeline-build: pipeline-init build
