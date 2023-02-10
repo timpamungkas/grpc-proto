@@ -28,7 +28,7 @@ jobs:
         run: |
           make pipeline-build
   tag-release:
-    needs: generate-protobuf-go
+  #  needs: generate-protobuf-go
     runs-on: ubuntu-latest
       - name: Bump version and push tag
         id: tag_version
