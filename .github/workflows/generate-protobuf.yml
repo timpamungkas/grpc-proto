@@ -5,6 +5,9 @@ on:
     paths:
       - 'proto/**.proto'
       - '.github/workflows/generate-protobuf.yml'
+  push:
+    branches:
+      - main
 
 jobs:
   generate-protobuf-go:
@@ -12,6 +15,8 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
       - name: Install Go
         uses: actions/setup-go@v3
         with:
