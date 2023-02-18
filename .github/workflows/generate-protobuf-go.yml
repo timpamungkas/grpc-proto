@@ -1,4 +1,4 @@
-name: Protobuf Codegen
+name: Create Protobuf - Go
 
 on:
   pull_request:
@@ -8,6 +8,7 @@ on:
   push:
     branches:
       - main
+      - master
 
 jobs:
   generate-protobuf-go:
