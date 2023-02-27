@@ -1,4 +1,4 @@
-name: Create Protobuf - Go
+name: [Push] Create & Tag Protobuf - Go
 
 on:
   push:
