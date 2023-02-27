@@ -23,8 +23,6 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type HelloServiceClient interface {
 	SayHello(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloResponse, error)
-	SayHelloTwo(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloResponse, error)
-	SayHelloThree(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloResponse, error)
 	SayManyHellos(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (HelloService_SayManyHellosClient, error)
 	SayHelloToEveryone(ctx context.Context, opts ...grpc.CallOption) (HelloService_SayHelloToEveryoneClient, error)
 	SayHelloContinuous(ctx context.Context, opts ...grpc.CallOption) (HelloService_SayHelloContinuousClient, error)
@@ -41,24 +39,6 @@ func NewHelloServiceClient(cc grpc.ClientConnInterface) HelloServiceClient {
 func (c *helloServiceClient) SayHello(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloResponse, error) {
 	out := new(HelloResponse)
 	err := c.cc.Invoke(ctx, "/hello.HelloService/SayHello", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *helloServiceClient) SayHelloTwo(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloResponse, error) {
-	out := new(HelloResponse)
-	err := c.cc.Invoke(ctx, "/hello.HelloService/SayHelloTwo", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *helloServiceClient) SayHelloThree(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloResponse, error) {
-	out := new(HelloResponse)
-	err := c.cc.Invoke(ctx, "/hello.HelloService/SayHelloThree", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -167,8 +147,6 @@ func (x *helloServiceSayHelloContinuousClient) Recv() (*HelloResponse, error) {
 // for forward compatibility
 type HelloServiceServer interface {
 	SayHello(context.Context, *HelloRequest) (*HelloResponse, error)
-	SayHelloTwo(context.Context, *HelloRequest) (*HelloResponse, error)
-	SayHelloThree(context.Context, *HelloRequest) (*HelloResponse, error)
 	SayManyHellos(*HelloRequest, HelloService_SayManyHellosServer) error
 	SayHelloToEveryone(HelloService_SayHelloToEveryoneServer) error
 	SayHelloContinuous(HelloService_SayHelloContinuousServer) error
@@ -181,12 +159,6 @@ type UnimplementedHelloServiceServer struct {
 
 func (UnimplementedHelloServiceServer) SayHello(context.Context, *HelloRequest) (*HelloResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SayHello not implemented")
-}
-func (UnimplementedHelloServiceServer) SayHelloTwo(context.Context, *HelloRequest) (*HelloResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SayHelloTwo not implemented")
-}
-func (UnimplementedHelloServiceServer) SayHelloThree(context.Context, *HelloRequest) (*HelloResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SayHelloThree not implemented")
 }
 func (UnimplementedHelloServiceServer) SayManyHellos(*HelloRequest, HelloService_SayManyHellosServer) error {
 	return status.Errorf(codes.Unimplemented, "method SayManyHellos not implemented")
@@ -224,42 +196,6 @@ func _HelloService_SayHello_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(HelloServiceServer).SayHello(ctx, req.(*HelloRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _HelloService_SayHelloTwo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HelloRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(HelloServiceServer).SayHelloTwo(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/hello.HelloService/SayHelloTwo",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HelloServiceServer).SayHelloTwo(ctx, req.(*HelloRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _HelloService_SayHelloThree_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HelloRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(HelloServiceServer).SayHelloThree(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/hello.HelloService/SayHelloThree",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HelloServiceServer).SayHelloThree(ctx, req.(*HelloRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -347,14 +283,6 @@ var HelloService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SayHello",
 			Handler:    _HelloService_SayHello_Handler,
-		},
-		{
-			MethodName: "SayHelloTwo",
-			Handler:    _HelloService_SayHelloTwo_Handler,
-		},
-		{
-			MethodName: "SayHelloThree",
-			Handler:    _HelloService_SayHelloThree_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
