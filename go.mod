@@ -1,6 +1,6 @@
 module github.com/timpamungkas/course-grpc-proto
 
-go 1.19
+go 1.20
 
 require (
 	google.golang.org/genproto v0.0.0-20230227214838-9b19f0bdc514
