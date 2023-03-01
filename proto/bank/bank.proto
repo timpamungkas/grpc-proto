@@ -15,6 +15,7 @@ message CurrentBalanceRequest {
 message CurrentBalanceResponse {
   int32 amount = 1;
   google.type.Date current_date = 2 [json_name = "current_date"];
+  string name = 16;
 }
 
 service BankService {
