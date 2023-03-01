@@ -18,5 +18,5 @@ message CurrentBalanceResponse {
 }
 
 service HelloService {
-  rpc CurrentBalance (CurrentBalanceRequest) returns (CurrentBalanceResponse) {}
+  rpc GetCurrentBalance (CurrentBalanceRequest) returns (CurrentBalanceResponse) {}
 }
