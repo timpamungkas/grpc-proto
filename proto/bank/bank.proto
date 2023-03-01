@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package bank;
+
+import "proto/google/type/date.proto";
+
+// replace this with your own github username and repo
+// github.com/<username>/<repo>/protogen/go/...
+option go_package = "github.com/timpamungkas/course-grpc-proto/protogen/go/bank";
+
+message CurrentBalanceRequest {
+  string account_number = 1 [json_name = "account_number"];
+}
+
+message CurrentBalanceResponse {
+  int32 amount = 1;
+  google.type.Date current_date = 2 [json_name = "current_date"];
+}
+
+service HelloService {
+  rpc CurrentBalance (CurrentBalanceRequest) returns (CurrentBalanceResponse) {}
+}
