@@ -1,4 +1,4 @@
-name: [Pull Request] Check Protobuf - Go
+name: Pull Request - Check Protobuf - Go
 
 on:
   pull_request:
