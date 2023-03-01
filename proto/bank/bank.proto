@@ -17,6 +17,6 @@ message CurrentBalanceResponse {
   google.type.Date current_date = 2 [json_name = "current_date"];
 }
 
-service HelloService {
+service BankService {
   rpc GetCurrentBalance (CurrentBalanceRequest) returns (CurrentBalanceResponse) {}
 }
