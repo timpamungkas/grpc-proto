@@ -17,6 +17,19 @@ message CurrentBalanceResponse {
   google.type.Date current_date = 2 [json_name = "current_date"];
 }
 
+message ExchangeRateRequest {
+  string from_currency = 1 [json_name = "from_currency"];
+  string to_currency = 2 [json_name = "to_currency"];
+}
+
+message ExchangeRateResponse {
+  string from_currency = 1 [json_name = "from_currency"];
+  string to_currency = 2 [json_name = "to_currency"];
+  string timestamp = 3;
+  float rate = 4;
+}
+
 service BankService {
   rpc GetCurrentBalance (CurrentBalanceRequest) returns (CurrentBalanceResponse) {}
+  rpc FetchExchangeRate(ExchangeRateRequest) returns (stream ExchangeRateResponse) {}
 }
