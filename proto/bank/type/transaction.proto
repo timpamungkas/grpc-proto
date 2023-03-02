@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package bank;
+
+import "proto/google/type/date.proto";
+
+// replace this with your own github username and repo
+// github.com/<username>/<repo>/protogen/go/...
+option go_package = "github.com/timpamungkas/course-grpc-proto/protogen/go/bank";
+
+enum TransactionType {
+  TRANSACTION_TYPE_UNSPECIFIED = 0;
+  TRANSACTION_TYPE_IN = 1;
+  TRANSACTION_TYPE_OUT = 2;
+}
