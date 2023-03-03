@@ -5,7 +5,7 @@ package bank;
 import "proto/google/type/date.proto";
 
 // replace this with your own github username and repo
-// github.com/<username>/<repo>/protogen/go/... 
+// github.com/<username>/<repo>/protogen/go/...
 option go_package = "github.com/timpamungkas/grpc-proto/protogen/go/bank";
 
 message ExchangeRateRequest {
