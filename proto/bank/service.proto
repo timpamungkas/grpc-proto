@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package bank;
+
+import "proto/bank/type/balance.proto";
+import "proto/bank/type/exchange.proto";
+import "proto/bank/type/transaction.proto";
+import "proto/bank/type/transfer.proto";
+
+// replace this with your own github username and repo
+// github.com/<username>/<repo>/protogen/go/...
+option go_package = "github.com/timpamungkas/course-grpc-proto/protogen/go/bank";
+
+service BankService {
+  rpc GetCurrentBalance (CurrentBalanceRequest) 
+  returns (CurrentBalanceResponse) {}
+  
+  rpc FetchExchangeRate(ExchangeRateRequest) 
+  returns (stream ExchangeRateResponse) {}
+
+  rpc SummarizeTransaction(stream Transaction)
+  returns (TransactionSummary) {}
+
+  rpc TransferMultiple(stream TransferRequest)
+  returns (stream TransferResponse) {}
+}

@@ -8,15 +8,6 @@ import "proto/google/type/date.proto";
 // github.com/<username>/<repo>/protogen/go/...
 option go_package = "github.com/timpamungkas/course-grpc-proto/protogen/go/bank";
 
-message CurrentBalanceRequest {
-  string account_number = 1 [json_name = "account_number"];
-}
-
-message CurrentBalanceResponse {
-  int32 amount = 1;
-  google.type.Date current_date = 2 [json_name = "current_date"];
-}
-
 message ExchangeRateRequest {
   string from_currency = 1 [json_name = "from_currency"];
   string to_currency = 2 [json_name = "to_currency"];
@@ -25,11 +16,6 @@ message ExchangeRateRequest {
 message ExchangeRateResponse {
   string from_currency = 1 [json_name = "from_currency"];
   string to_currency = 2 [json_name = "to_currency"];
-  float rate = 3;
+  double rate = 3;
   string timestamp = 4;
-}
-
-service BankService {
-  rpc GetCurrentBalance (CurrentBalanceRequest) returns (CurrentBalanceResponse) {}
-  rpc FetchExchangeRate(ExchangeRateRequest) returns (stream ExchangeRateResponse) {}
 }
