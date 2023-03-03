@@ -1,4 +1,4 @@
-GO_MODULE := github.com/timpamungkas/course-grpc-proto
+GO_MODULE := github.com/timpamungkas/grpc-proto
 
 .PHONY: clean
 clean:

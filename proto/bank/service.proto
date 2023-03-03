@@ -9,7 +9,7 @@ import "proto/bank/type/transfer.proto";
 
 // replace this with your own github username and repo
 // github.com/<username>/<repo>/protogen/go/...
-option go_package = "github.com/timpamungkas/course-grpc-proto/protogen/go/bank";
+option go_package = "github.com/timpamungkas/grpc-proto/protogen/go/bank";
 
 service BankService {
   rpc GetCurrentBalance (CurrentBalanceRequest) 
