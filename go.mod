@@ -1,4 +1,4 @@
-module github.com/timpamungkas/course-grpc-proto
+module github.com/timpamungkas/grpc-proto
 
 go 1.20
 
