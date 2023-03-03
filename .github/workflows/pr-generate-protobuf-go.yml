@@ -3,7 +3,7 @@ name: Pull Request - Check Protobuf - Go
 on:
   pull_request:
     paths:
-      - '**.proto'
+      - 'proto/**.proto'
 
 jobs:
   generate-protobuf-go:
