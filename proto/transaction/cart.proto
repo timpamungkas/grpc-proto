@@ -4,7 +4,7 @@ package transaction;
 
 // replace this with your own github username and repo
 // github.com/<username>/<repo>/protogen/go/...
-option go_package = "github.com/timpamungkas/course-grpc-proto/protogen/go/transaction";
+option go_package = "github.com/timpamungkas/grpc-proto/protogen/go/transaction";
 
 message CartItem {
   string item_uuid = 1 [json_name = "item_id"];
