@@ -19,10 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	BankService_GetCurrentBalance_FullMethodName    = "/bank.BankService/GetCurrentBalance"
-	BankService_FetchExchangeRate_FullMethodName    = "/bank.BankService/FetchExchangeRate"
-	BankService_SummarizeTransaction_FullMethodName = "/bank.BankService/SummarizeTransaction"
-	BankService_TransferMultiple_FullMethodName     = "/bank.BankService/TransferMultiple"
+	BankService_GetCurrentBalance_FullMethodName     = "/bank.BankService/GetCurrentBalance"
+	BankService_FetchExchangeRates_FullMethodName    = "/bank.BankService/FetchExchangeRates"
+	BankService_SummarizeTransactions_FullMethodName = "/bank.BankService/SummarizeTransactions"
+	BankService_TransferMultiple_FullMethodName      = "/bank.BankService/TransferMultiple"
 )
 
 // BankServiceClient is the client API for BankService service.
@@ -30,8 +30,8 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BankServiceClient interface {
 	GetCurrentBalance(ctx context.Context, in *CurrentBalanceRequest, opts ...grpc.CallOption) (*CurrentBalanceResponse, error)
-	FetchExchangeRate(ctx context.Context, in *ExchangeRateRequest, opts ...grpc.CallOption) (BankService_FetchExchangeRateClient, error)
-	SummarizeTransaction(ctx context.Context, opts ...grpc.CallOption) (BankService_SummarizeTransactionClient, error)
+	FetchExchangeRates(ctx context.Context, in *ExchangeRateRequest, opts ...grpc.CallOption) (BankService_FetchExchangeRatesClient, error)
+	SummarizeTransactions(ctx context.Context, opts ...grpc.CallOption) (BankService_SummarizeTransactionsClient, error)
 	TransferMultiple(ctx context.Context, opts ...grpc.CallOption) (BankService_TransferMultipleClient, error)
 }
 
@@ -52,12 +52,12 @@ func (c *bankServiceClient) GetCurrentBalance(ctx context.Context, in *CurrentBa
 	return out, nil
 }
 
-func (c *bankServiceClient) FetchExchangeRate(ctx context.Context, in *ExchangeRateRequest, opts ...grpc.CallOption) (BankService_FetchExchangeRateClient, error) {
-	stream, err := c.cc.NewStream(ctx, &BankService_ServiceDesc.Streams[0], BankService_FetchExchangeRate_FullMethodName, opts...)
+func (c *bankServiceClient) FetchExchangeRates(ctx context.Context, in *ExchangeRateRequest, opts ...grpc.CallOption) (BankService_FetchExchangeRatesClient, error) {
+	stream, err := c.cc.NewStream(ctx, &BankService_ServiceDesc.Streams[0], BankService_FetchExchangeRates_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &bankServiceFetchExchangeRateClient{stream}
+	x := &bankServiceFetchExchangeRatesClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -67,16 +67,16 @@ func (c *bankServiceClient) FetchExchangeRate(ctx context.Context, in *ExchangeR
 	return x, nil
 }
 
-type BankService_FetchExchangeRateClient interface {
+type BankService_FetchExchangeRatesClient interface {
 	Recv() (*ExchangeRateResponse, error)
 	grpc.ClientStream
 }
 
-type bankServiceFetchExchangeRateClient struct {
+type bankServiceFetchExchangeRatesClient struct {
 	grpc.ClientStream
 }
 
-func (x *bankServiceFetchExchangeRateClient) Recv() (*ExchangeRateResponse, error) {
+func (x *bankServiceFetchExchangeRatesClient) Recv() (*ExchangeRateResponse, error) {
 	m := new(ExchangeRateResponse)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
@@ -84,30 +84,30 @@ func (x *bankServiceFetchExchangeRateClient) Recv() (*ExchangeRateResponse, erro
 	return m, nil
 }
 
-func (c *bankServiceClient) SummarizeTransaction(ctx context.Context, opts ...grpc.CallOption) (BankService_SummarizeTransactionClient, error) {
-	stream, err := c.cc.NewStream(ctx, &BankService_ServiceDesc.Streams[1], BankService_SummarizeTransaction_FullMethodName, opts...)
+func (c *bankServiceClient) SummarizeTransactions(ctx context.Context, opts ...grpc.CallOption) (BankService_SummarizeTransactionsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &BankService_ServiceDesc.Streams[1], BankService_SummarizeTransactions_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &bankServiceSummarizeTransactionClient{stream}
+	x := &bankServiceSummarizeTransactionsClient{stream}
 	return x, nil
 }
 
-type BankService_SummarizeTransactionClient interface {
+type BankService_SummarizeTransactionsClient interface {
 	Send(*Transaction) error
 	CloseAndRecv() (*TransactionSummary, error)
 	grpc.ClientStream
 }
 
-type bankServiceSummarizeTransactionClient struct {
+type bankServiceSummarizeTransactionsClient struct {
 	grpc.ClientStream
 }
 
-func (x *bankServiceSummarizeTransactionClient) Send(m *Transaction) error {
+func (x *bankServiceSummarizeTransactionsClient) Send(m *Transaction) error {
 	return x.ClientStream.SendMsg(m)
 }
 
-func (x *bankServiceSummarizeTransactionClient) CloseAndRecv() (*TransactionSummary, error) {
+func (x *bankServiceSummarizeTransactionsClient) CloseAndRecv() (*TransactionSummary, error) {
 	if err := x.ClientStream.CloseSend(); err != nil {
 		return nil, err
 	}
@@ -154,8 +154,8 @@ func (x *bankServiceTransferMultipleClient) Recv() (*TransferResponse, error) {
 // for forward compatibility
 type BankServiceServer interface {
 	GetCurrentBalance(context.Context, *CurrentBalanceRequest) (*CurrentBalanceResponse, error)
-	FetchExchangeRate(*ExchangeRateRequest, BankService_FetchExchangeRateServer) error
-	SummarizeTransaction(BankService_SummarizeTransactionServer) error
+	FetchExchangeRates(*ExchangeRateRequest, BankService_FetchExchangeRatesServer) error
+	SummarizeTransactions(BankService_SummarizeTransactionsServer) error
 	TransferMultiple(BankService_TransferMultipleServer) error
 	mustEmbedUnimplementedBankServiceServer()
 }
@@ -167,11 +167,11 @@ type UnimplementedBankServiceServer struct {
 func (UnimplementedBankServiceServer) GetCurrentBalance(context.Context, *CurrentBalanceRequest) (*CurrentBalanceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCurrentBalance not implemented")
 }
-func (UnimplementedBankServiceServer) FetchExchangeRate(*ExchangeRateRequest, BankService_FetchExchangeRateServer) error {
-	return status.Errorf(codes.Unimplemented, "method FetchExchangeRate not implemented")
+func (UnimplementedBankServiceServer) FetchExchangeRates(*ExchangeRateRequest, BankService_FetchExchangeRatesServer) error {
+	return status.Errorf(codes.Unimplemented, "method FetchExchangeRates not implemented")
 }
-func (UnimplementedBankServiceServer) SummarizeTransaction(BankService_SummarizeTransactionServer) error {
-	return status.Errorf(codes.Unimplemented, "method SummarizeTransaction not implemented")
+func (UnimplementedBankServiceServer) SummarizeTransactions(BankService_SummarizeTransactionsServer) error {
+	return status.Errorf(codes.Unimplemented, "method SummarizeTransactions not implemented")
 }
 func (UnimplementedBankServiceServer) TransferMultiple(BankService_TransferMultipleServer) error {
 	return status.Errorf(codes.Unimplemented, "method TransferMultiple not implemented")
@@ -207,46 +207,46 @@ func _BankService_GetCurrentBalance_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BankService_FetchExchangeRate_Handler(srv interface{}, stream grpc.ServerStream) error {
+func _BankService_FetchExchangeRates_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(ExchangeRateRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(BankServiceServer).FetchExchangeRate(m, &bankServiceFetchExchangeRateServer{stream})
+	return srv.(BankServiceServer).FetchExchangeRates(m, &bankServiceFetchExchangeRatesServer{stream})
 }
 
-type BankService_FetchExchangeRateServer interface {
+type BankService_FetchExchangeRatesServer interface {
 	Send(*ExchangeRateResponse) error
 	grpc.ServerStream
 }
 
-type bankServiceFetchExchangeRateServer struct {
+type bankServiceFetchExchangeRatesServer struct {
 	grpc.ServerStream
 }
 
-func (x *bankServiceFetchExchangeRateServer) Send(m *ExchangeRateResponse) error {
+func (x *bankServiceFetchExchangeRatesServer) Send(m *ExchangeRateResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _BankService_SummarizeTransaction_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(BankServiceServer).SummarizeTransaction(&bankServiceSummarizeTransactionServer{stream})
+func _BankService_SummarizeTransactions_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(BankServiceServer).SummarizeTransactions(&bankServiceSummarizeTransactionsServer{stream})
 }
 
-type BankService_SummarizeTransactionServer interface {
+type BankService_SummarizeTransactionsServer interface {
 	SendAndClose(*TransactionSummary) error
 	Recv() (*Transaction, error)
 	grpc.ServerStream
 }
 
-type bankServiceSummarizeTransactionServer struct {
+type bankServiceSummarizeTransactionsServer struct {
 	grpc.ServerStream
 }
 
-func (x *bankServiceSummarizeTransactionServer) SendAndClose(m *TransactionSummary) error {
+func (x *bankServiceSummarizeTransactionsServer) SendAndClose(m *TransactionSummary) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func (x *bankServiceSummarizeTransactionServer) Recv() (*Transaction, error) {
+func (x *bankServiceSummarizeTransactionsServer) Recv() (*Transaction, error) {
 	m := new(Transaction)
 	if err := x.ServerStream.RecvMsg(m); err != nil {
 		return nil, err
@@ -294,13 +294,13 @@ var BankService_ServiceDesc = grpc.ServiceDesc{
 	},
 	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "FetchExchangeRate",
-			Handler:       _BankService_FetchExchangeRate_Handler,
+			StreamName:    "FetchExchangeRates",
+			Handler:       _BankService_FetchExchangeRates_Handler,
 			ServerStreams: true,
 		},
 		{
-			StreamName:    "SummarizeTransaction",
-			Handler:       _BankService_SummarizeTransaction_Handler,
+			StreamName:    "SummarizeTransactions",
+			Handler:       _BankService_SummarizeTransactions_Handler,
 			ClientStreams: true,
 		},
 		{
