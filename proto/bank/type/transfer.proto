@@ -17,13 +17,15 @@ enum TransferStatus {
 message TransferRequest {
   string from_account_number = 1 [json_name = "from_account_number"];
   string to_account_number = 2 [json_name = "to_account_number"];
-  double amount = 3;
+  string currency = 3;
+  double amount = 4;
 }
 
 message TransferResponse {
   string from_account_number = 1 [json_name = "from_account_number"];
   string to_account_number = 2 [json_name = "to_account_number"];
-  double amount = 3;
-  TransferStatus status = 4;
-  google.type.DateTime timestamp = 5;
+  string currency = 3;
+  double amount = 4;
+  TransferStatus status = 5;
+  google.type.DateTime timestamp = 6;
 }
