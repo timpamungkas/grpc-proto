@@ -25,5 +25,5 @@ service BankService {
   returns (stream TransferResponse) {}
 
   rpc CreateAccount(CreateAccountRequest)
-  returns (CreateAccountResponse)
+  returns (CreateAccountResponse) {}
 }
