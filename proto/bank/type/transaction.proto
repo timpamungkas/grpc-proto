@@ -6,7 +6,7 @@ import "proto/google/type/date.proto";
 import "proto/google/type/datetime.proto";
 
 // replace this with your own github username and repo
-// github.com/<username>/<repo>/protogen/go/...
+// github.com/<username>/<repo>/protogen/go/... 
 option go_package = "github.com/timpamungkas/grpc-proto/protogen/go/bank";
 
 enum TransactionType {
