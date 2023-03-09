@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package bank;
 
+import "proto/google/rpc/status.proto";
+
 // replace this with your own github username and repo
 // github.com/<username>/<repo>/protogen/go/...
 option go_package = "github.com/timpamungkas/grpc-proto/protogen/go/bank";
@@ -16,4 +18,6 @@ message ExchangeRateResponse {
   string to_currency = 2 [json_name = "to_currency"];
   double rate = 3;
   string timestamp = 4;
+
+  google.rpc.Status status = 16;
 }
