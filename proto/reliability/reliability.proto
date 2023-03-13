@@ -13,7 +13,7 @@ message ReliabilityRequest {
 }
 
 message ReliabilityResponse {
-  string random_string = 1 [json_name = "random_string"];
+  string dummy_string = 1 [json_name = "dummy_string"];
   int32 delay_second = 2 [json_name = "delay_second"];
 }
 
