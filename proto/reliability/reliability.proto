@@ -14,7 +14,7 @@ message ReliabilityRequest {
 
 message ReliabilityResponse {
   string dummy_string = 1 [json_name = "dummy_string"];
-  int32 delay_second = 2 [json_name = "delay_second"];
+  uint32 status_code = 2 [json_name = "status_code"];
 }
 
 service ReliabilityService {
